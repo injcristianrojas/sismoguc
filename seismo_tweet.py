@@ -28,7 +28,7 @@ def parse_tweet(tweet):
 	)
 	quake_time_iso = datetime_isoformat(quake_time) + 'Z'
 	data = {
-		'time': quake_time_iso,
+		'quake_time': quake_time_iso,
 		'mag': float(m.group('mag')),
 	}
 	m = re.match("Lat: (?P<lat>-?\d+.\d+)", stripped[1])
@@ -36,7 +36,7 @@ def parse_tweet(tweet):
 	m = re.match("Lon: (?P<lng>-?\d+.\d+)", stripped[2])
 	data['lng'] = float(m.group('lng'))
 	data['location'] = stripped[3][5:]
-	data['published_on'] = datetime_isoformat(tweet.created_at) + 'Z'
+	data['publication_time'] = datetime_isoformat(tweet.created_at) + 'Z'
 	return data
 
 def get_data():
@@ -48,4 +48,5 @@ def jsonize_data():
 
 if __name__ == "__main__":
 	tweets = get_tweets()
-	print jsonize_data()
+	j = jsonize_data()
+	print j
