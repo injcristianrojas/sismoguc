@@ -16,7 +16,10 @@ def get_tweets(count = 20):
 def parse_tweet(tweet):
 	stripped = [t.strip() for t in tweet.text.split(',')]
 	time_and_mag = stripped[0]
-	m = re.match("Hora UTC: (?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+) (?P<hour>\d+):(?P<minute>\d+):(?P<second>\d+).(?P<decimal>\d+) UTC mag: (?P<mag>\d+.\d+)", time_and_mag)
+	m = re.match("Hora UTC: (?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+) "
+				+ "(?P<hour>\d+):(?P<minute>\d+):(?P<second>\d+)."
+				+ "(?P<decimal>\d+) UTC mag: (?P<mag>\d+.\d+)",
+				time_and_mag)
 	quake_time = datetime.datetime(
 		int(m.group('year')),
 		int(m.group('month')),
@@ -39,8 +42,10 @@ def parse_tweet(tweet):
 	return data
 	
 def convert_datetime_data_to_iso(data_item):
-	data_item['quake_time'] = datetime_isoformat(data_item['quake_time']) + 'Z'
-	data_item['publication_time'] = datetime_isoformat(data_item['publication_time']) + 'Z'
+	data_item['quake_time'] = datetime_isoformat(
+		data_item['quake_time']) + 'Z'
+	data_item['publication_time'] = datetime_isoformat(
+		data_item['publication_time']) + 'Z'
 	return data_item
 
 def get_data(count = 20):
@@ -48,7 +53,8 @@ def get_data(count = 20):
 	return [parse_tweet(t) for t in tweet_list]
 
 def jsonize_data(count = 20):
-	return json.dumps([convert_datetime_data_to_iso(datum) for datum in get_data(count)])
+	return json.dumps([convert_datetime_data_to_iso(datum)
+		for datum in get_data(count)])
 
 if __name__ == "__main__":
 	tweets = get_tweets()
