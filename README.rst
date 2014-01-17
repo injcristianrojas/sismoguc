@@ -35,7 +35,7 @@ que contiene los siguientes datos:
 - quake_time: Momento de ocurrencia del sismo, en hora UTC, formato ISO 8601
 - publication_time: Momento de publicación del reporte en Twitter, en hora UTC, formato ISO 8601
 - location: Ubicación aproximada del epicentro
-- mag: Magnitud del sismo en escala de Richter
+- mag: Magnitud del sismo en escala de Momento de Magnitud
 - lat: Latitud del epicentro
 - lng: Longitud del epicentro
 
